@@ -3,10 +3,10 @@ from typing import List, Dict
 
 INPUT_FILE = 'input_day3'
 
+
 @dataclass
 class PowerConsumption:
     input_file: str
-
 
     def calculate_power_consumption(self):
         matrix = self.get_byte_list_matrix()
@@ -56,7 +56,7 @@ class PowerConsumption:
 
         for digit in binary:
             if digit == '1':
-                decimal += 2 ** power
+                decimal += 2**power
             power -= 1
 
         return decimal
@@ -70,7 +70,7 @@ class PowerConsumption:
         return matrix
 
 
-power_consumption = PowerConsumption(input_file = INPUT_FILE)
+power_consumption = PowerConsumption(input_file=INPUT_FILE)
 
 print(power_consumption.calculate_power_consumption())
 print(power_consumption.calculate_life_support_rating())

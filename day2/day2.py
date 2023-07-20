@@ -4,6 +4,7 @@ import re
 
 INPUT_FILE = 'input_day2'
 
+
 @dataclass
 class Submarine:
     input_file: str
@@ -35,7 +36,7 @@ class Submarine:
                 if row[0] == 'f':
                     direction = 'forward'
                     horizontal_position += units
-                    depth += (aim * units)
+                    depth += aim * units
                 elif row[0] == 'd':
                     direction = 'down'
                     aim += units
@@ -44,15 +45,12 @@ class Submarine:
                     aim -= units
         return horizontal_position * depth
 
-
     def calculate_forward_times_depth(self) -> int:
         coordinates = self.get_coordinates()
         return coordinates['forward'] * (coordinates['down'] - coordinates['up'])
 
 
-
-
-submarine = Submarine(input_file = INPUT_FILE)
+submarine = Submarine(input_file=INPUT_FILE)
 
 
 print(f'The answer for day 2 part 1: "{submarine.calculate_forward_times_depth()}"')
