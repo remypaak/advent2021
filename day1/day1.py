@@ -8,7 +8,7 @@ INPUT_FILE = 'input_day1'
 class OceanDepth:
     input_file: str
 
-    def calculate_amount_of_depth_increases(self) -> int:
+    def count_amount_of_depth_increases(self) -> int:
         previous_depth = 1000000
         depth_increases = 0
         with open(self.input_file, 'r', newline='') as file:
@@ -19,10 +19,9 @@ class OceanDepth:
                 previous_depth = current_depth
         return depth_increases
 
-    def sliding_window(self):
+    def count_amount_of_depth_increases_with_sliding_window(self, window_length: int):
         previous_depth = 1000000
         depth_increases = 0
-        window_length = 3
         depth_list = self.get_depth_list()
         for i in range(len(depth_list) - window_length + 1):
             current_depth = sum(depth_list[i : i + window_length])
@@ -39,7 +38,7 @@ class OceanDepth:
         return depth_list
 
 
-ocean_depth = OceanDepth(input_file=INPUT_FILE)
-
-print(f'The answer for day 1 part 1 : "{ocean_depth.calculate_amount_of_depth_increases()}"')
-print(f'The answer for day 1 part 2: "{ocean_depth.sliding_window()}"')
+if __name__ == "__main__":
+    ocean_depth = OceanDepth(INPUT_FILE)
+    print(f"The answer for day 1 part 1: {ocean_depth.count_amount_of_depth_increases()}")
+    print(f"The answer for day 2 part 2: {ocean_depth.count_amount_of_depth_increases_with_sliding_window(3)}")
