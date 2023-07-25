@@ -51,7 +51,7 @@ class PassagePath:
         self.all_paths = set()
         start = 'start'
         end = 'end'
-        self.special_dfs(start, end, [((start, ), False)])
+        self.special_dfs(start, end, [((start,), False)])
         return len(self.all_paths)
 
     def special_dfs(self, current, end, path):

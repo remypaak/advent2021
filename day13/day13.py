@@ -21,7 +21,7 @@ class PaperFolding:
             self.instructions = [item.split('=') for item in instructions]
             self.fill_sheet(dot_map)
 
-    def fill_sheet(self,  dot_map):
+    def fill_sheet(self, dot_map):
         max_x = max([int(line[0]) for line in dot_map]) + 1
         max_y = max([int(line[1]) for line in dot_map]) + 1
         self.sheet = [['.' for _ in range(max_x)] for _ in range(max_y)]
@@ -48,14 +48,14 @@ class PaperFolding:
             for y in range(line_number + 1, len(self.sheet)):
                 for x in range(len(self.sheet[0])):
                     if self.sheet[y][x] == '#':
-                        self.sheet[y-((y-line_number)*2)][x] = '#'
+                        self.sheet[y - ((y - line_number) * 2)][x] = '#'
             self.sheet = self.sheet[:line_number]
         elif axis == 'x':
             for y in range(len(self.sheet)):
                 for x in range(line_number + 1, len(self.sheet[0])):
                     if self.sheet[y][x] == '#':
-                        self.sheet[y][x-((x-line_number)*2)] = '#'
-            self.sheet = [row[:-line_number - 1] for row in self.sheet]
+                        self.sheet[y][x - ((x - line_number) * 2)] = '#'
+            self.sheet = [row[: -line_number - 1] for row in self.sheet]
 
 
 if __name__ == "__main__":

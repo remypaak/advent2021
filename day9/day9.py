@@ -50,16 +50,28 @@ class SmokeBasin:
         if row_idx < 0 or column_idx < 0 or row_idx >= len(self.height_map) or column_idx >= len(self.height_map[0]):
             return basin.size
         basin.visited[(row_idx, column_idx)] = True
-        if (row_idx - 1, column_idx) not in basin.visited and self.get_square_above(row_idx, column_idx) not in [9, None]:
+        if (row_idx - 1, column_idx) not in basin.visited and self.get_square_above(row_idx, column_idx) not in [
+            9,
+            None,
+        ]:
             basin.size += 1
             self.get_basin_size(row_idx - 1, column_idx, basin)
-        if (row_idx + 1, column_idx) not in basin.visited and self.get_square_under(row_idx, column_idx) not in [9, None]:
+        if (row_idx + 1, column_idx) not in basin.visited and self.get_square_under(row_idx, column_idx) not in [
+            9,
+            None,
+        ]:
             basin.size += 1
             self.get_basin_size(row_idx + 1, column_idx, basin)
-        if (row_idx, column_idx - 1) not in basin.visited and self.get_square_left(row_idx, column_idx) not in [9, None]:
+        if (row_idx, column_idx - 1) not in basin.visited and self.get_square_left(row_idx, column_idx) not in [
+            9,
+            None,
+        ]:
             basin.size += 1
             self.get_basin_size(row_idx, column_idx - 1, basin)
-        if (row_idx, column_idx + 1) not in basin.visited and self.get_square_right(row_idx, column_idx) not in [9, None]:
+        if (row_idx, column_idx + 1) not in basin.visited and self.get_square_right(row_idx, column_idx) not in [
+            9,
+            None,
+        ]:
             basin.size += 1
             self.get_basin_size(row_idx, column_idx + 1, basin)
         return basin.size
@@ -70,7 +82,7 @@ class SmokeBasin:
             self.get_square_above(row_idx, column_idx),
             self.get_square_under(row_idx, column_idx),
             self.get_square_left(row_idx, column_idx),
-            self.get_square_right(row_idx, column_idx)
+            self.get_square_right(row_idx, column_idx),
         ]
 
         for neighbor in neighbors:

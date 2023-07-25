@@ -24,7 +24,7 @@ class SyntaxScoring:
                 closing_brackets = self.find_missing_closing_brackets(brackets)
                 if closing_brackets is not None:
                     auto_complete_score = sum(
-                        self.auto_complete_points_map.get(bracket, 0) * 5 ** i
+                        self.auto_complete_points_map.get(bracket, 0) * 5**i
                         for i, bracket in enumerate(reversed(closing_brackets))
                     )
                     auto_complete_scores.append(auto_complete_score)
