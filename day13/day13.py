@@ -10,10 +10,10 @@ class PaperFolding:
     sheet: List[List[str]] | None = None
     instructions: List[List] | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.parse_file()
 
-    def parse_file(self):
+    def parse_file(self) -> None:
         with open(self.input_file, 'r') as file:
             content, instructions = file.read().split('\n\n')
             dot_map = [item.split(',') for item in content.splitlines()]
@@ -21,7 +21,7 @@ class PaperFolding:
             self.instructions = [item.split('=') for item in instructions]
             self.fill_sheet(dot_map)
 
-    def fill_sheet(self, dot_map):
+    def fill_sheet(self, dot_map: List[List[str]]) -> None:
         max_x = max([int(line[0]) for line in dot_map]) + 1
         max_y = max([int(line[1]) for line in dot_map]) + 1
         self.sheet = [['.' for _ in range(max_x)] for _ in range(max_y)]
@@ -29,7 +29,7 @@ class PaperFolding:
             x, y = int(coordinates[0]), int(coordinates[1])
             self.sheet[y][x] = '#'
 
-    def get_visible_dots_after_x_folds(self, amount_of_folds: int):
+    def get_visible_dots_after_x_folds(self, amount_of_folds: int) -> int:
         for fold in range(amount_of_folds):
             self.fold_paper(self.instructions[fold])
         return len([char for row in self.sheet for char in row if char == '#'])
@@ -42,7 +42,7 @@ class PaperFolding:
                 print(f'  {char}', end='') if char == '#' else print('   ', end='')
             print('\n')
 
-    def fold_paper(self, instruction: List):
+    def fold_paper(self, instruction: List[str]):
         axis, line_number = instruction[0], int(instruction[1])
         if axis == 'y':
             for y in range(line_number + 1, len(self.sheet)):

@@ -1,19 +1,18 @@
 from dataclasses import dataclass
-from typing import List, Optional
-import copy
+from typing import Set, List, Tuple, Any
 
 INPUT_FILE = 'input_day12'
 
 
 class Graph:
-    def __init__(self):
+    def __init__(self) -> None:
         self.graph = {}
 
-    def add_vertex(self, vertex):
+    def add_vertex(self, vertex: str) -> None:
         if vertex not in self.graph:
             self.graph[vertex] = []
 
-    def add_edge(self, src, dest):
+    def add_edge(self, src: str, dest: str) -> None:
         self.add_vertex(src)
         self.add_vertex(dest)
         self.graph[src].append(dest)
@@ -23,8 +22,11 @@ class Graph:
 @dataclass
 class PassagePath:
     input_file: str
+    visited_small_caves: Set[str] | None = None
+    path_graph: Graph | None = None
+    all_paths: Set[str] | None = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.create_passage_graph()
 
     def create_passage_graph(self) -> None:
@@ -54,9 +56,9 @@ class PassagePath:
         self.special_dfs(start, end, [((start,), False)])
         return len(self.all_paths)
 
-    def special_dfs(self, current, end, path):
+    def special_dfs(self, current: str, end: str, path: List[Tuple[Tuple, bool]]) -> None:
         path, double_visited = path.pop()
-        if current == 'end':
+        if current == end:
             self.all_paths.add(''.join(path[:]))
             return
         for neighbor in self.path_graph.graph[current]:
@@ -69,7 +71,7 @@ class PassagePath:
                 new_path = [((*path, neighbor), True)]
                 self.special_dfs(neighbor, end, new_path)
 
-    def dfs(self, current, end, path):
+    def dfs(self, current: str, end: str, path: List[str]) -> None:
         if current.islower():
             self.visited_small_caves.add(current)
         if current == end:

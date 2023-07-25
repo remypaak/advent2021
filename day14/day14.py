@@ -11,10 +11,10 @@ class Polymerization:
     polymer_template: List[str] = None
     insertion_rules: dict = None
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.parse_file()
 
-    def parse_file(self):
+    def parse_file(self) -> None:
         self.insertion_rules = {}
         with open(self.input_file, 'r') as file:
             polymer_template, instructions = file.read().split('\n\n')
@@ -23,7 +23,7 @@ class Polymerization:
                 pair, insertion = instruction.split('->')
                 self.insertion_rules[pair.strip()] = insertion.strip()
 
-    def get_polymer_result(self, cycles: int):
+    def get_polymer_result(self, cycles: int) -> int:
         char_count = Counter()
         pair_count = self.get_polymer_template_pair_count()
         for _ in range(cycles - 1):
